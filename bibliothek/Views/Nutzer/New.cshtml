@@ -1,0 +1,32 @@
+﻿@using bibliothek
+@model bibliothek.Nutzer
+
+@{
+    ViewBag.Title = "New";
+}
+
+@Html.ValidationSummary()
+
+<h2>Nutzer anlegen/bearbeiten</h2>
+
+@using (Html.BeginForm())
+    {
+        <table>
+            <tr>
+                <th>@Html.LabelFor(nutzer => nutzer.Vorname)</th>
+                <th>@Html.LabelFor(nutzer => nutzer.Name)</th>
+                <th>@Html.LabelFor(nutzer => nutzer.Geburtsdatum)</th>
+                <th>@Html.LabelFor(nutzer => nutzer.Login)</th>
+                <th>@Html.LabelFor(nutzer => nutzer.Passwort)</th>
+            </tr>
+            <tr>
+                <td>@Html.TextBoxFor(nutzer => nutzer.Vorname)</td>
+                <td>@Html.TextBoxFor(nutzer => nutzer.Name)</td>
+                <td>@Html.EditorFor(nutzer => nutzer.Geburtsdatum)</td>
+                <td>@Html.EditorFor(nutzer => nutzer.Login)</td>
+                <td>@Html.PasswordFor(nutzer => nutzer.Passwort)</td>
+            </tr>
+        </table>
+    
+    <input type="submit" value="Speichern"/>
+    }

@@ -1,0 +1,48 @@
+﻿@model bibliothek.Nutzer
+
+@using bibliothek
+@{
+    ViewBag.Title = "AusleiheOverview";
+}
+
+<h2>Übersicht der durch den Nutzer <i>"@Model.Vorname  @Model.Name"</i> ausgeliehenen Bücher:</h2>
+
+<table class="overview">
+    <tr>
+        <th>@Html.LabelFor(x => new Ausleihe().Buch.Titel)</th>
+        <th>@Html.LabelFor(x => new Ausleihe().Buch.Autor)</th>
+        @*        <th>@Html.LabelFor(x => new Ausleihe().Nutzer.Vorname)</th>
+        <th>@Html.LabelFor(x => new Ausleihe().Nutzer.Name)</th>*@
+        <th>@Html.LabelFor(x => new Ausleihe().Von)</th>
+        <th>@Html.LabelFor(x => new Ausleihe().Bis)</th>
+    
+        @if (@Session["user_Login"].Equals("Admin"))
+        {
+            <th>@Html.LabelFor(x => new Ausleihe().Rueckgabe)</th>
+        }
+     </tr>
+    @foreach (var ausleihe in Model.AusleiheList)
+    {
+        <tr>
+            <td>@ausleihe.Buch.Titel</td>
+            <td>@ausleihe.Buch.Autor</td>
+            @*            <td>@ausleihe.Nutzer.Vorname</td>
+            <td>@ausleihe.Nutzer.Name</td>*@
+            <td>@ausleihe.Von</td>
+            <td>@ausleihe.Bis</td>
+
+            <td>
+                    @if (@ausleihe.Rueckgabe == null && @Session["user_Login"].Equals("Admin"))
+                    {
+                        @Html.ActionLink("zurückgeben", "Return", new {ausleiheId = ausleihe.Id, nutzerId = Model.Id})
+                    }
+                    else
+                    {
+                        @ausleihe.Rueckgabe
+                    }
+                </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Zurück", null, null, null, new { href = Request.UrlReferrer})

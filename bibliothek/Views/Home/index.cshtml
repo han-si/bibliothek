@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "index";
+}
+
+@if (@Session["user_Login"] != null)
+{
+    <h4>Angemeldet als: <i> @Session["user_Login"].ToString() </i></h4>
+    <br/>
+}
+
+<h2>Hauptmenü</h2>
+
+@if (Request.IsAuthenticated)
+    {
+        if (@Session["user_Login"] != null && @Session["user_Login"].ToString() == "Admin")
+        {
+            @Html.ActionLink("Nutzer", "Index", "Nutzer")
+            <br/>
+            @Html.ActionLink("Wiederherstellen", "Reset")
+            <br/>
+            @Html.ActionLink("Ausleihen", "Index", "Ausleihe")
+            <br/>
+        }
+        else if (Session["user_Id"] != null)
+        {
+            @Html.ActionLink("Ausgeliehene Bücher", "AusleiheOverview", "Nutzer", new {nutzerId = (int)@Session["user_Id"]}, null)
+            <br/>
+        }
+        @Html.ActionLink("Bücher", "Index", "Buch")
+        <br/>
+        @Html.ActionLink("Abmelden", "Logout", "Home")
+    }
+

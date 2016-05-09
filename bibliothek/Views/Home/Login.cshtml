@@ -1,0 +1,26 @@
+﻿@model bibliothek.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@Html.ViewBag.Msg
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+        <table>
+            <tr>
+                <th>@Html.LabelFor(nutzer => nutzer.Login)</th>
+                <th>@Html.LabelFor(nutzer => nutzer.Passwort)</th>
+            </tr>
+            <tr>
+                <td>@Html.EditorFor(nutzer => nutzer.Login)</td>
+                <td>@Html.PasswordFor(nutzer => nutzer.Passwort)</td>
+            </tr>
+        </table>
+    
+    <input type="submit" value="Absenden"/>
+    
+}

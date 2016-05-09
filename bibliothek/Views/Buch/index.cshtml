@@ -1,0 +1,81 @@
+﻿@using System.Web.Mvc.Html
+@using bibliothek
+@model List<bibliothek.Buch>
+
+@{
+    ViewBag.Title = "Test";
+}
+
+@ViewBag.Msg
+
+@Html.ActionLink("Home", "Index", "Home");
+
+
+<h2>Bücher</h2>
+
+<table class="overview">
+    <tr>
+        <th>@Html.LabelFor(x => new Buch().Titel)</th>
+        <th>@Html.LabelFor(x => new Buch().Autor)</th>
+        <th>@Html.LabelFor(x => new Buch().ISBN)</th>
+        @if (@Session["user_Login"].Equals("Admin"))
+        {
+            <th>Löschen</th>
+        }
+        <th>Ausleihe</th>
+        <th>Reservieren</th>
+    </tr>
+    @foreach (var buch in Model)
+    {
+        <tr>
+            <td>@buch.Titel</td>
+            <td>@buch.Autor</td>
+            <td>@buch.ISBN</td>
+        @if (@Session["user_Login"].Equals("Admin"))
+        {
+            <td>
+                @if (@buch.AusgeliehenBis == null)
+                {
+                    @Html.ActionLink("löschen", "Delete", new {id = buch.Id})
+                }
+                else
+                {
+                    <text> </text>
+                }
+            </td>
+        }
+            <td>
+                @if (@buch.AusgeliehenBis == null && @Session["user_Login"].Equals("Admin"))
+                {
+                    @Html.ActionLink("ausleihen", "New", "Ausleihe", new {buchId = buch.Id}, null)
+                }
+                else if (@buch.AusgeliehenBis != null)
+                {
+                    <text>ausgeliehen bis: </text>
+                    @buch.AusgeliehenBis
+                }
+                else
+                {
+                    <text>verfügbar </text>
+                }
+
+            </td>
+            <td>
+                @if (@buch.Reservierung == null)
+                {
+                    @Html.ActionLink("reservieren", "New", "Reservierung", new {buchId = buch.Id}, null)
+                }
+                else
+                {
+                    <p>reserviert bis: </p> @buch.Reservierung.GueltigBis
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+        @if (@Session["user_Login"].Equals("Admin"))
+        {
+            @Html.ActionLink("Buch anlegen", "New") <br/>
+        }
+

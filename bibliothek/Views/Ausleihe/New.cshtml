@@ -1,0 +1,49 @@
+﻿@using bibliothek
+@model bibliothek.Ausleihe
+
+@{
+    ViewBag.Title = "New";
+}
+
+@Html.ValidationSummary()
+
+<h2>Ausleihe</h2>
+@using (Html.BeginForm())
+{
+
+    <h3>Buch</h3>
+    
+    @Html.HiddenFor(model => model.Buch.Id)
+    @Html.HiddenFor(model => model.Buch.Titel)
+    @Html.HiddenFor(model => model.Buch.Autor)
+    @Html.HiddenFor(model => model.Buch.ISBN)
+
+    <table>
+        <tr>
+            <td>@Html.LabelFor(model => model.Buch.Titel)</td>
+            <td>@Html.DisplayFor(model => model.Buch.Titel)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Buch.Autor)</td>
+            <td>@Html.DisplayFor(model => model.Buch.Autor)</td>
+        </tr>
+    </table>
+
+    <h3>Datum</h3>
+    <table>
+        <tr>
+            <td>@Html.LabelFor(model => model.Von)</td>
+            <td>@Html.EditorFor(model => model.Von)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.Bis)</td>
+            <td>@Html.EditorFor(model => model.Bis)</td>
+        </tr>
+    </table>
+
+    <h3>Nutzer auswählen</h3>
+
+    @Html.DropDownListFor(model => model.NutzerId, Model.NutzerList)
+
+    <input type="submit" value="Speichern"/>
+}

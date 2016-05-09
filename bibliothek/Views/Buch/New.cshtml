@@ -1,0 +1,28 @@
+﻿@using bibliothek
+@model bibliothek.Buch
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@Html.ValidationSummary()
+
+<h2>Buch anlegen/bearbeiten</h2>
+
+@using (Html.BeginForm())
+    {
+        <table>
+            <tr>
+                <th>@Html.LabelFor(buch => buch.Titel)</th>
+                <th>@Html.LabelFor(buch => buch.Autor)</th>
+                <th>@Html.LabelFor(buch => buch.ISBN)</th>
+            </tr>
+            <tr>
+                <td>@Html.TextBoxFor(buch => buch.Titel)</td>
+                <td>@Html.TextBoxFor(buch => buch.Autor)</td>
+                <td>@Html.TextBoxFor(buch => buch.ISBN)</td>
+            </tr>
+        </table>
+    
+    <input type="submit" value="Speichern"/>
+    }

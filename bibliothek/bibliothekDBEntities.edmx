@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bibliothekDBModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="bibliothekDBModelStoreContainer">
+          <EntitySet Name="Ausleihe" EntityType="bibliothekDBModel.Store.Ausleihe" store:Type="Tables" />
+          <EntitySet Name="Buch" EntityType="bibliothekDBModel.Store.Buch" store:Type="Tables" />
+          <EntitySet Name="Nutzer" EntityType="bibliothekDBModel.Store.Nutzer" store:Type="Tables" />
+          <EntitySet Name="Reservierung" EntityType="bibliothekDBModel.Store.Reservierung" store:Type="Tables" />
+        </EntityContainer>
+        <EntityType Name="Ausleihe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NutzerId" Type="int" Nullable="false" />
+          <Property Name="BuchId" Type="int" Nullable="false" />
+          <Property Name="Von" Type="datetime" Nullable="false" />
+          <Property Name="Bis" Type="datetime" Nullable="false" />
+          <Property Name="Rueckgabe" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Buch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Titel" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Autor" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="ISBN" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Nutzer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Vorname" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Geburtsdatum" Type="datetime" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Passwort" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="IstAktiv" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservierung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="BuchId" Type="int" Nullable="false" />
+          <Property Name="NutzerId" Type="int" Nullable="false" />
+          <Property Name="GueltigBis" Type="datetime" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bibliothekDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="bibliothekDBEntities1" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Ausleihe" EntityType="bibliothekDBModel.Ausleihe" />
+          <EntitySet Name="Buch" EntityType="bibliothekDBModel.Buch" />
+          <EntitySet Name="Nutzer" EntityType="bibliothekDBModel.Nutzer" />
+          <EntitySet Name="Reservierung" EntityType="bibliothekDBModel.Reservierung" />
+        </EntityContainer>
+        <EntityType Name="Ausleihe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NutzerId" Type="Int32" Nullable="false" />
+          <Property Name="BuchId" Type="Int32" Nullable="false" />
+          <Property Name="Von" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Bis" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Rueckgabe" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Buch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Autor" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ISBN" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Nutzer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Vorname" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Geburtsdatum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Passwort" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="IstAktiv" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservierung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BuchId" Type="Int32" Nullable="false" />
+          <Property Name="NutzerId" Type="Int32" Nullable="false" />
+          <Property Name="GueltigBis" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bibliothekDBModelStoreContainer" CdmEntityContainer="bibliothekDBEntities1">
+          <EntitySetMapping Name="Ausleihe">
+            <EntityTypeMapping TypeName="bibliothekDBModel.Ausleihe">
+              <MappingFragment StoreEntitySet="Ausleihe">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NutzerId" ColumnName="NutzerId" />
+                <ScalarProperty Name="BuchId" ColumnName="BuchId" />
+                <ScalarProperty Name="Von" ColumnName="Von" />
+                <ScalarProperty Name="Bis" ColumnName="Bis" />
+                <ScalarProperty Name="Rueckgabe" ColumnName="Rueckgabe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buch">
+            <EntityTypeMapping TypeName="bibliothekDBModel.Buch">
+              <MappingFragment StoreEntitySet="Buch">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nutzer">
+            <EntityTypeMapping TypeName="bibliothekDBModel.Nutzer">
+              <MappingFragment StoreEntitySet="Nutzer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Geburtsdatum" ColumnName="Geburtsdatum" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Passwort" ColumnName="Passwort" />
+                <ScalarProperty Name="IstAktiv" ColumnName="IstAktiv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservierung">
+            <EntityTypeMapping TypeName="bibliothekDBModel.Reservierung">
+              <MappingFragment StoreEntitySet="Reservierung">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BuchId" ColumnName="BuchId" />
+                <ScalarProperty Name="NutzerId" ColumnName="NutzerId" />
+                <ScalarProperty Name="GueltigBis" ColumnName="GueltigBis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
